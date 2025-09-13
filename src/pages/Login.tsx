@@ -1,10 +1,5 @@
 import { Auth } from '@supabase/auth-ui-react';
-import { ThemeSupa } from<think>**Analyzing the Login Error**
-
-I'm now zeroing in on the `src/pages/Login.tsx` file due to the persistent "Unexpected token 'think'" error. It appears an undeleted `<think>` tag is still the culprit. I'm taking a more exhaustive approach this time, searching for any remnants of the tag within the file.
-
-
-</think> '@supabase/auth-ui-shared';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { supabase } from '@/integrations/supabase/client';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSession } from '@/contexts/SessionContext';
