@@ -64,7 +64,7 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
         .from('admin_users')
         .select('id')
         .eq('user_id', user.id)
-        .single(),
+        .maybeSingle(), // Use maybeSingle to handle no rows found gracefully
     ]);
 
     if (profileError && profileError.code !== 'PGRST116') {
@@ -103,11 +103,12 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // NOVO: Lógica para definir isAdmin
+    // Handle adminError gracefully, especially PGRST116 (no rows found)
     if (adminError && adminError.code !== 'PGRST116') {
       console.error('fetchProfile: Error fetching admin status:', adminError);
       setIsAdmin(false);
     } else {
-      setIsAdmin(!!adminData);
+      setIsAdmin(!!adminData); // adminData will be null if no row found, which means not an admin
       console.log('fetchProfile: User is admin:', !!adminData);
     }
 

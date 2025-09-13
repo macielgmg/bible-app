@@ -9,7 +9,7 @@ import Store from "./pages/Store";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import { SessionProvider } from "./contexts/SessionContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+import AuthProtectedRoute from "./components/AuthProtectedRoute"; // Renamed import
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminUsersPage from "./pages/AdminUsersPage";
@@ -58,18 +58,23 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/share/:templateId" element={<SharedContentPage />} />
-                <Route path="/onboarding-quiz" element={<ProtectedRoute><OnboardingQuiz /></ProtectedRoute>} />
+                {/* Onboarding Quiz is now protected by AuthProtectedRoute */}
+                <Route path="/onboarding-quiz" element={<AuthProtectedRoute><OnboardingQuiz /></AuthProtectedRoute>} />
+                
+                {/* Admin Routes */}
                 <Route path="/management" element={<AdminProtectedRoute><AdminDashboardPage /></AdminProtectedRoute>} />
                 <Route path="/management/users" element={<AdminProtectedRoute><AdminUsersPage /></AdminProtectedRoute>} />
                 <Route path="/management/studies" element={<AdminProtectedRoute><AdminStudiesPage /></AdminProtectedRoute>} />
                 <Route path="/management/daily-content" element={<AdminProtectedRoute><AdminDailyContentPage /></AdminProtectedRoute>} />
                 <Route path="/management/activity" element={<AdminProtectedRoute><AdminActivityPage /></AdminProtectedRoute>} />
-                <Route path="/management/feedback" element={<AdminProtectedRoute><AdminFeedbackPage /></AdminProtectedRoute>} /> {/* Nova rota */}
+                <Route path="/management/feedback" element={<AdminProtectedRoute><AdminFeedbackPage /></AdminProtectedRoute>} />
+                
+                {/* General Authenticated Routes */}
                 <Route 
                   element={
-                    <ProtectedRoute>
+                    <AuthProtectedRoute> {/* Use AuthProtectedRoute here */}
                       <Layout />
-                    </ProtectedRoute>
+                    </AuthProtectedRoute>
                   }
                 >
                   <Route path="/library" element={<StudyLibrary />} />

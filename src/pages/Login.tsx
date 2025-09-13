@@ -36,16 +36,9 @@ const Login = () => {
     );
   }
 
-  // MODIFICADO: Lógica de redirecionamento para permitir que o fluxo de onboarding seja concluído
+  // If session exists, always redirect to /today. AuthProtectedRoute will handle onboarding.
   if (session) {
-    const isInOnboardingFlow = currentScreen === 'onboardingLoading' || currentScreen === 'welcomeScreen';
-    if (!isInOnboardingFlow) {
-      // Se o usuário já está logado e NÃO está no meio do fluxo de onboarding,
-      // redireciona para a página principal do app. ProtectedRoute fará a verificação do onboarding e admin.
-      return <Navigate to="/today" replace />;
-    }
-    // Se o usuário está logado E está no meio do fluxo de onboarding,
-    // permite que o componente de onboarding atual continue a renderizar e gerencie a navegação.
+    return <Navigate to="/today" replace />;
   }
 
   const handleSignUpSuccess = () => {
