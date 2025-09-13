@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 120 20% 95%; /* Very light green-grey background */
+    --foreground: 120 10% 20%; /* Dark green-grey for text and primary elements */
+
+    --card: 0 0% 100%; /* White card background */
+    --card-foreground: 120 10% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 120 10% 20%;
+
+    --primary: 120 10% 20%; /* NEW: Dark green-grey, matching the button in screenshot */
+    --primary-foreground: 120 20% 95%; /* NEW: Light green-grey, matching the background for text on primary */
+
+    --secondary: 120 20% 90%; /* Light green-grey for secondary backgrounds */
+    --secondary-foreground: 120 10% 20%;
+
+    --muted: 120 15% 85%;
+    --muted-foreground: 120 5% 40%;
+
+    --accent: 120 10% 30%; /* NEW: Slightly lighter version of new primary for accents */
+    --accent-foreground: 120 20% 95%; /* NEW: Light green-grey */
+
+    --destructive: 0 84.2% 60.2%; /* Keep red for destructive actions */
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 120 15% 80%;
+    --input: 120 15% 80%;
+    --ring: 120 10% 20%; /* NEW: Matches new primary */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Você pode adicionar um tema escuro aqui depois, se quiser */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  html, body, #root { /* Adicionado #root também para garantir que o container React tenha altura */
+    height: 100%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes fade-out { /* NOVO: Keyframes para fade-out */
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
