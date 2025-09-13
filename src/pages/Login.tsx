@@ -4,12 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSession } from '@/contexts/SessionContext';
 import { Logo } from '@/components/Logo';
-import { useState<think>**Tackling the Redirection Conflict**
-
-I've just implemented the proposed fix in `Login.tsx`, which involved conditional redirection based on `currentScreen`. This adjustment aims to resolve the infinite re-render loop, allowing for a seamless onboarding process. The component now redirects only if the user is already signed in and *not* in the onboarding flow, addressing the premature redirection after signup.
-
-
-</think>, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { SignUpForm } from '@/components/SignUpForm';
@@ -17,7 +12,12 @@ import { OnboardingLoading } from '@/components/OnboardingLoading';
 import { WelcomeScreen } from '@/components/WelcomeScreen';
 import { logUserActivity } from '@/utils/logging';
 
-const Login = () => {
+const Login = () => {<think>**Eliminating Syntax Errors**
+
+I've hit a snag with a syntax error in the Login.tsx file, specifically around the `useState` import. It seems I inadvertently included my internal placeholder, `<think>`, causing the compiler to choke on line 7. I'm focusing on cleaning up the import statement, ensuring it reads `import { useState, useEffect } from 'react';` to get things back on track.
+
+
+</think>
   const { session, loading } = useSession();
   const navigate = useNavigate();
   
