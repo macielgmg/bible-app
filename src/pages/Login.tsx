@@ -4,13 +4,18 @@ import { supabase } from '@/integrations/supabase/client';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSession } from '@/contexts/SessionContext';
 import { Logo } from '@/components/Logo';
-import { useState, useEffect } from 'react'; // Importar useEffect
+import { useState<think>**Tackling the Redirection Conflict**
+
+I've just implemented the proposed fix in `Login.tsx`, which involved conditional redirection based on `currentScreen`. This adjustment aims to resolve the infinite re-render loop, allowing for a seamless onboarding process. The component now redirects only if the user is already signed in and *not* in the onboarding flow, addressing the premature redirection after signup.
+
+
+</think>, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { SignUpForm } from '@/components/SignUpForm';
 import { OnboardingLoading } from '@/components/OnboardingLoading';
 import { WelcomeScreen } from '@/components/WelcomeScreen';
-import { logUserActivity } from '@/utils/logging'; // Importar função de logging
+import { logUserActivity } from '@/utils/logging';
 
 const Login = () => {
   const { session, loading } = useSession();
@@ -36,10 +41,16 @@ const Login = () => {
     );
   }
 
-  // Se o usuário já está logado, o ProtectedRoute se encarregará do redirecionamento
-  // para /onboarding-quiz, /today ou o modal de admin.
+  // MODIFICADO: Lógica de redirecionamento para permitir que o fluxo de onboarding seja concluído
   if (session) {
-    return <Navigate to="/today" replace />; // Redireciona para /today, ProtectedRoute fará a verificação do onboarding e admin
+    const isInOnboardingFlow = currentScreen === 'onboardingLoading' || currentScreen === 'welcomeScreen';
+    if (!isInOnboardingFlow) {
+      // Se o usuário já está logado e NÃO está no meio do fluxo de onboarding,
+      // redireciona para a página principal do app. ProtectedRoute fará a verificação do onboarding e admin.
+      return <Navigate to="/today" replace />;
+    }
+    // Se o usuário está logado E está no meio do fluxo de onboarding,
+    // permite que o componente de onboarding atual continue a renderizar e gerencie a navegação.
   }
 
   const handleSignUpSuccess = () => {
